@@ -1,0 +1,4 @@
+worker-id: a9c1877d-964e-45a8-824c-f176a0294b2c
+logs.users: []
+logs.groups: []
+topology.submitter.user: hp
