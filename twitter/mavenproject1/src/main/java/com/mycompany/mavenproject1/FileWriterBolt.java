@@ -12,18 +12,12 @@ import org.apache.storm.topology.IRichBolt;
 import org.apache.storm.topology.OutputFieldsDeclarer;
 import org.apache.storm.tuple.Tuple;
  
-
- 
-/**
- * This bolt join the tuples from both DetailsExtractorBolt and RetweetDetailsExtractorBolt.
-
- */
 public class FileWriterBolt implements IRichBolt {
-    // serial version id.
+
     private static final long serialVersionUID = 1L;
-    // File object.
+
     private File file = null;
-    // FileWriter object.
+
     private FileWriter fileWriter = null;    
  
     @Override
@@ -31,10 +25,6 @@ public class FileWriterBolt implements IRichBolt {
  
     }
  
-    /* (non-Javadoc)
-     * @see backtype.storm.task.IBolt#execute(backtype.storm.tuple.Tuple)
-     * This method process the details from both DetailsExtractorBolt and RetweetDetailsExtractorBolt.
-     */
     @Override
     public void execute(Tuple tuple) {
         String screenName = "";
@@ -47,7 +37,7 @@ public class FileWriterBolt implements IRichBolt {
         String retweetScreenName = "";
         String retweetUserName = "";
         String title = "";        
-//        checks whether coming tuple is from DetailsExtractorBolt or RetweetDetailsExtractorBolt.
+
         if ("retweetDetailsExtractorBolt".equals(tuple.getSourceComponent())) {
             title = (String) tuple.getValueByField("title");
             isRetweet = (Boolean) tuple.getValueByField("isRetweet");
@@ -89,11 +79,6 @@ public class FileWriterBolt implements IRichBolt {
         this.write(title);    
     }
  
-    /* (non-Javadoc)
-     * @see backtype.storm.task.IBolt#prepare(java.util.Map, backtype.storm.task.TopologyContext, backtype.storm.task.OutputCollector)
-     * This method executes when instantiate created for this bolt.
-     * It creates user_tweets.csv file with the template.
-     */
     @Override
     public void prepare(Map arg0, TopologyContext arg1,
             OutputCollector collector) {
@@ -115,20 +100,16 @@ public class FileWriterBolt implements IRichBolt {
  
     @Override
     public void declareOutputFields(OutputFieldsDeclarer arg0) {
-        // TODO Auto-generated method stub
+
  
     }
  
     @Override
     public Map<String, Object> getComponentConfiguration() {
-        // TODO Auto-generated method stub
+
         return null;
     }
  
-    /**
-     * @param uniqueId
-     * This method writes details in to file if all the tuples processed from the both bolts.
-     */
     public void write(String uniqueId) {
         FileDetails fileDetails = TweetDetailsManager.get(uniqueId);
         if (fileDetails != null) {
