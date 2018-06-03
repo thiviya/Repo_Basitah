@@ -15,9 +15,7 @@ import org.apache.storm.tuple.Values;
 import twitter4j.Status;
 
 public abstract class DetailsExtractorBolt implements IRichBolt{
-    /**
-     * 
-     */
+  
     private static final long serialVersionUID = 1L;
     private OutputCollector collector;
  
@@ -57,7 +55,7 @@ public abstract class DetailsExtractorBolt implements IRichBolt{
  
     @Override
     public Map<String, Object> getComponentConfiguration() {
-        // TODO Auto-generated method stub
+    
         return null;
     }
  
